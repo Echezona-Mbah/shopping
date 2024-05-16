@@ -26,7 +26,11 @@ class AboutController extends Controller
 
     public function allitems(){
 
-
         return view('allitems');
+    }
+
+    public function details(){
+
+        return view('details');
     }
 }
