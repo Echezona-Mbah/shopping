@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\Admin\WatchController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -38,11 +39,20 @@ Route::middleware('guest')->group(function () {
     Route::get('contact', [AboutController::class, 'contact'])->name('contact');
     Route::get('cart', [AboutController::class, 'cart'])->name('cart');
     Route::get('allitems', [AboutController::class, 'allitems'])->name('allitems');
+    Route::get('details', [AboutController::class, 'details'])->name('details');
+
 
 
 });
 
 Route::middleware('auth')->group(function () {
+
+    Route::get('watch', [WatchController::class, 'watch'])->name('watch');
+    Route::post('watch', [WatchController::class, 'store'])->name('watch');
+
+
+
+
     Route::get('verify-email', EmailVerificationPromptController::class)
                 ->name('verification.notice');
 

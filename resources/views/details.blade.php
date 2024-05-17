@@ -20,6 +20,7 @@
                     <p class="mb-4">Welcome to Promzy’ Luxury Hub, where elegance meets craftsmanship in every piece of our exquisite jewelry collection. Step into a world of timeless beauty and sophistication, where each gemstone tells a story and every design reflects unparalleled artistry. From stunning engagement
                          rings to statement necklaces and delicate earrings, our curated selection caters to every style and occasion.</p>
 
+                    <a class="btn btn-primary py-3 px-5 mt-2" href="{{route('cart')}}">Add Cart</a>
                 </div>
             </div>
         </div>

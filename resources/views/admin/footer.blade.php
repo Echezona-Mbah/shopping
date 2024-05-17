@@ -1,3 +1,17 @@
+@if ($errors->any())
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+                icon: 'error',
+                title: 'Validation Error',
+                html: `{!! implode('<br>', $errors->all()) !!}`,
+                confirmButtonText: 'OK',
+            });
+        });
+    </script>
+@endif
+
 <!-- base:js -->
 <script src="{{asset('assets/vendors/js/vendor.bundle.base.js')}}"></script>
 <!-- endinject -->
