@@ -23,6 +23,8 @@ class WatchController extends Controller
             'discription' => 'required|string',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+        //dd($request->img);die();
+
 
         if ($request->hasFile('img')) {
             $image = $request->file('img');
@@ -32,6 +34,7 @@ class WatchController extends Controller
             $imageName = null; 
         }
 
+       // dd($imageName);die();
         $watch = new Watch();
         $watch->name = $request->name;
         $watch->amount = $request->amount;

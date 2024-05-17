@@ -42,21 +42,22 @@
 
                       <div class="form-group">
                         <label>File upload</label>
-                        <input type="file" name="img[]" class="file-upload-default">
+                        <input type="file" name="img" class="file-upload-default" id="fileInput">
                         <div class="input-group col-xs-12">
-                          <input type="text"  class="form-control file-upload-info" disabled placeholder="Upload Image">
-                          <span class="input-group-append">
-                            <button class="file-upload-browse btn btn-primary" type="button">Upload</button>
-                          </span>
+                            <input type="text" name="img" class="form-control file-upload-info" disabled placeholder="Upload Image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-primary" type="button" onclick="document.getElementById('fileInput').click()">Upload</button>
+                            </span>
                         </div>
-                      </div>
+                    </div>
+                    
 
 
                       <div class="form-group">
                         <label for="exampleTextarea1">Discription</label>
                         <textarea class="form-control" name="discription" id="exampleTextarea1" rows="4"></textarea>
                       </div>
-                      <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                      <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                   </div>
                 </div>
