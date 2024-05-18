@@ -106,7 +106,7 @@
                         @csrf
                         <div class="card mb-3 border-0">
                             <div class="text-center card-header" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px; font-weight: 600; font-size: larger;">
-                                Checkout
+                                <button type="submit" class="btn btn-primary">Checkout</button>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -134,7 +134,7 @@
                                 <h5 style="color: white;">Total:</h5>
                                 <p id="total">0.00</p>
                                 <input type="hidden" name="total" id="hiddenTotal">
-                                <button type="submit" class="btn btn-primary">Checkout</button>
+                                {{-- <button type="submit" class="btn btn-primary">Checkout</button> --}}
                             </div>
                         </div>
                     </form>
@@ -200,6 +200,8 @@
                 const subtotalElement = document.getElementById('subtotal');
                 const totalElement = document.getElementById('total');
                 const deliveryOptions = document.querySelectorAll('input[name="deliveryOption"]');
+                const hiddenSubtotal = document.getElementById('hiddenSubtotal');
+                const hiddenTotal = document.getElementById('hiddenTotal');
         
                 function calculateSubtotal() {
                     let subtotal = 0;
@@ -212,6 +214,7 @@
                         subtotal += itemTotal;
                     });
                     subtotalElement.textContent = subtotal.toFixed(2);
+                    hiddenSubtotal.value = subtotal.toFixed(2);
                     calculateTotal(subtotal);
                 }
         
@@ -219,6 +222,7 @@
                     const deliveryCharge = parseFloat(document.querySelector('input[name="deliveryOption"]:checked').value);
                     const total = subtotal + deliveryCharge;
                     totalElement.textContent = total.toFixed(2);
+                    hiddenTotal.value = total.toFixed(2);
                 }
         
                 function updateQuantity(button, increment) {
@@ -252,6 +256,7 @@
                 calculateSubtotal(); // Initial calculation
             });
         </script>
+        
         
 
   @include('footer')
