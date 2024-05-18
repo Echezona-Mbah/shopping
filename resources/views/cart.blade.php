@@ -102,37 +102,44 @@
                 @endif
 
                 <div class="container mt-5" style="max-width: 700px;">
-                    <div class="card mb-3 border-0">
-                        <div class="text-center card-header" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px; font-weight: 600; font-size: larger;">
-                            Checkout
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5>Subtotal:</h5>
-                                    <p id="subtotal">0.00</p>
-                                </div>
+                    <form action="{{ route('checkout.store') }}" method="POST">
+                        @csrf
+                        <div class="card mb-3 border-0">
+                            <div class="text-center card-header" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px; font-weight: 600; font-size: larger;">
+                                Checkout
                             </div>
-                            <div class="row">
-                                <div class="col">
-                                    <h5>Delivery Options:</h5>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="deliveryOption" id="withinOwerri" value="2000" checked>
-                                        <label class="form-check-label" for="withinOwerri">Within Owerri (2,000)</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="deliveryOption" id="outsideOwerri" value="4000">
-                                        <label class="form-check-label" for="outsideOwerri">Outside Owerri (4,000)</label>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Subtotal:</h5>
+                                        <p id="subtotal">0.00</p>
+                                        <input type="hidden" name="subtotal" id="hiddenSubtotal">
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <h5>Delivery Options:</h5>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="deliveryOption" id="withinOwerri" value="2000" checked>
+                                            <label class="form-check-label" for="withinOwerri">Within Owerri (2,000)</label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="deliveryOption" id="outsideOwerri" value="4000">
+                                            <label class="form-check-label" for="outsideOwerri">Outside Owerri (4,000)</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px;">
+                                <h5 style="color: white;">Total:</h5>
+                                <p id="total">0.00</p>
+                                <input type="hidden" name="total" id="hiddenTotal">
+                                <button type="submit" class="btn btn-primary">Checkout</button>
                             </div>
                         </div>
-                        <div class="card-footer" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px;">
-                            <h5 style="color: white;">Total:</h5>
-                            <p id="total">0.00</p>
-                        </div>
-                    </div>
+                    </form>
                 </div>
+                
                 
                   
                   
