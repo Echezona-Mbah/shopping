@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Watch;
 use Illuminate\Http\Request;
 
 class AboutController extends Controller
@@ -29,8 +30,8 @@ class AboutController extends Controller
         return view('allitems');
     }
 
-    public function details(){
-
-        return view('details');
+    public function details($id){
+        $watch = Watch::where('id',$id)->get();
+        return view('details',compact('watch'));
     }
 }

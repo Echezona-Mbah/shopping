@@ -47,4 +47,6 @@ class WatchController extends Controller
         Alert::success(" $request->categories", 'Watch was successfully Upload.')->showConfirmButton('OK');
         return redirect()->back();
     }
+
+    
 }

@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -39,7 +40,12 @@ Route::middleware('guest')->group(function () {
     Route::get('contact', [AboutController::class, 'contact'])->name('contact');
     Route::get('cart', [AboutController::class, 'cart'])->name('cart');
     Route::get('allitems', [AboutController::class, 'allitems'])->name('allitems');
-    Route::get('details', [AboutController::class, 'details'])->name('details');
+    Route::get('details/{id}', [AboutController::class, 'details'])->name('details');
+    Route::post('/cart/add/{id}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+    Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::post('/cart/remove/{id}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+
 
 
 

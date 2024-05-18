@@ -26,11 +26,20 @@
 
 
       
-
+    
 
         <!-- Cart Page Start -->
         <div class="container-fluid py-5">
             <div class="container py-5">
+                <h2>Shopping Cart</h2>
+        
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+            
+                @if($cart)
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
@@ -40,162 +49,99 @@
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Total</th>
-                            <th scope="col">Remove</th>
+                            <th scope="col">Actions</th>
                           </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @foreach($cart as $id => $details)
+                            <tr data-id="{{ $id }}">
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img src="/img/jewerly 4.avif" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                        <img src="{{ asset('uploads/' . $details['img']) }}" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                     </div>
                                 </th>
                                 <td>
-                                    <p class="mb-0 mt-4">Jollof Rice</p>
+                                    <p class="mb-0 mt-4">{{ $details['name'] }}</p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">5,000</p>
+                                    <p class="mb-0 mt-4">{{ number_format($details['amount'], 2) }}</p>
                                 </td>
                                 <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
+                                    <form action="{{ route('cart.update') }}" method="POST" class="update-form">
+                                        @csrf
+                                        <div class="input-group quantity mt-4" style="width: 150px;">
+                                            <input type="hidden" name="id" value="{{ $id }}">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                    <i class="fa fa-minus"></i>
+                                                </button>
+                                            </div>
+                                            <input type="number" name="quantity" class="form-control form-control-sm text-center border-0 quantity-input" value="{{ $details['quantity'] }}" data-price="{{ $details['amount'] }}" min="1">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                    <i class="fa fa-plus"></i>
+                                                </button>
+                                            </div>
                                         </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4">5,000</p>
+                                    <p class="mb-0 mt-4 item-total">{{ number_format($details['amount'] * $details['quantity'], 2) }}</p>
                                 </td>
                                 <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </td>
-                            
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="/img/Jewellry 2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4">Cocktail</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2,000</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2,000</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
+                                    <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="btn btn-md rounded-circle bg-light border mt-4">
+                                            <i class="fa fa-times text-danger"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="/img/jewelry 3.webp" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4">Jollof Spaghetti</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">4,500</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                            
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">4,500</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
-                
+                @else
+                <p>Your cart is empty</p>
+                @endif
 
                 <div class="container mt-5" style="max-width: 700px;">
                     <div class="card mb-3 border-0">
-                      <div class="text-center card-header" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px;font-weight: 600; font-size: larger;">
-                        Checkout
-                      </div>
-                      <div class="card-body">
-                        <div class="row">
-                          <div class="col">
-                            <h5>Subtotal:</h5>
-                            <p>$100.00</p>
-                          </div>
+                        <div class="text-center card-header" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px; font-weight: 600; font-size: larger;">
+                            Checkout
                         </div>
-                        <div class="row">
-                          <div class="col">
-                            <h5>Delivery Options:</h5>
-                            <div class="form-check">
-                              <input class="form-check-input" type="radio" name="deliveryOption" id="standard" value="standard" checked>
-                              <label class="form-check-label" for="standard">
-                                Within Owerri (2,000)
-                              </label>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Subtotal:</h5>
+                                    <p id="subtotal">0.00</p>
+                                </div>
                             </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="deliveryOption" id="standard" value="standard" checked>
-                                <label class="form-check-label" for="standard">
-                                  Outside Owerri (4,000)
-                                </label>
-                              </div>
-                            
-                          </div>
+                            <div class="row">
+                                <div class="col">
+                                    <h5>Delivery Options:</h5>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="deliveryOption" id="withinOwerri" value="2000" checked>
+                                        <label class="form-check-label" for="withinOwerri">
+                                            Within Owerri (2,000)
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="deliveryOption" id="outsideOwerri" value="4000">
+                                        <label class="form-check-label" for="outsideOwerri">
+                                            Outside Owerri (4,000)
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-                      <div class="card-footer" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px;">
-                        <h5 style="color: white;">Total:</h5>
-                        <p>$100.00</p>
-                      </div>
+                        <div class="card-footer" style="background-color: rgb(41, 41, 41); color: white; border-radius: 10px;">
+                            <h5 style="color: white;">Total:</h5>
+                            <p id="total">0.00</p>
+                        </div>
                     </div>
-                  </div>
+                </div>
+                
                   
                   
 
@@ -250,11 +196,92 @@
 
 
 
-
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const quantityInputs = document.querySelectorAll('.quantity-input');
+                const subtotalElement = document.getElementById('subtotal');
+                const totalElement = document.getElementById('total');
+                const deliveryOptions = document.querySelectorAll('input[name="deliveryOption"]');
+        
+                function calculateSubtotal() {
+                    let subtotal = 0;
+                    document.querySelectorAll('.quantity-input').forEach(input => {
+                        const quantity = parseFloat(input.value);
+                        const price = parseFloat(input.getAttribute('data-price'));
+                        const itemTotalElement = input.closest('tr').querySelector('.item-total');
+                        const itemTotal = price * quantity;
+                        itemTotalElement.textContent = itemTotal.toFixed(2);
+                        subtotal += itemTotal;
+                    });
+                    subtotalElement.textContent = subtotal.toFixed(2);
+                    calculateTotal(subtotal);
+                }
+        
+                function calculateTotal(subtotal) {
+                    const deliveryCharge = parseFloat(document.querySelector('input[name="deliveryOption"]:checked').value);
+                    const total = subtotal + deliveryCharge;
+                    totalElement.textContent = total.toFixed(2);
+                }
+        
+                quantityInputs.forEach(input => {
+                    input.addEventListener('input', calculateSubtotal);
+                });
+        
+                deliveryOptions.forEach(option => {
+                    option.addEventListener('change', () => {
+                        const subtotal = parseFloat(subtotalElement.textContent);
+                        calculateTotal(subtotal);
+                    });
+                });
+        
+                calculateSubtotal(); // Initial calculation
+            });
+        </script>
+            
                   
 
                   
         <!-- Cart Page End -->
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                function updateItemTotal(row) {
+                    var price = parseFloat(row.querySelector('.quantity-input').dataset.price);
+                    var quantity = parseInt(row.querySelector('.quantity-input').value, 10);
+                    var total = price * quantity;
+                    row.querySelector('.item-total').textContent = total.toFixed(2);
+                }
+            
+                document.querySelectorAll('.btn-minus').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var input = this.closest('.input-group').querySelector('input[type="number"]');
+                        var value = parseInt(input.value, 10);
+                        if (value > 1) {
+                            input.value = value - 1;
+                            updateItemTotal(this.closest('tr'));
+                        }
+                    });
+                });
+            
+                document.querySelectorAll('.btn-plus').forEach(function (button) {
+                    button.addEventListener('click', function () {
+                        var input = this.closest('.input-group').querySelector('input[type="number"]');
+                        input.value = parseInt(input.value, 10) + 1;
+                        updateItemTotal(this.closest('tr'));
+                    });
+                });
+            
+                document.querySelectorAll('.quantity-input').forEach(function (input) {
+                    input.addEventListener('change', function () {
+                        if (this.value < 1) {
+                            this.value = 1;
+                        }
+                        updateItemTotal(this.closest('tr'));
+                    });
+                });
+            });
+        </script>
+            
 
 
   @include('footer')
