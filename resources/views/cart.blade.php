@@ -67,23 +67,19 @@
                                     <p class="mb-0 mt-4">{{ number_format($details['amount'], 2) }}</p>
                                 </td>
                                 <td>
-                                    <form action="{{ route('cart.update') }}" method="POST" class="update-form">
-                                        @csrf
-                                        <div class="input-group quantity mt-4" style="width: 150px;">
-                                            <input type="hidden" name="id" value="{{ $id }}">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
-                                                    <i class="fa fa-minus"></i>
-                                                </button>
-                                            </div>
-                                            <input type="number" name="quantity" class="form-control form-control-sm text-center border-0 quantity-input" value="{{ $details['quantity'] }}" data-price="{{ $details['amount'] }}" min="1">
-                                            <div class="input-group-btn">
-                                                <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                    <i class="fa fa-plus"></i>
-                                                </button>
-                                            </div>
+                                    <div class="input-group quantity mt-4" style="width: 150px;">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
+                                                <i class="fa fa-minus"></i>
+                                            </button>
                                         </div>
-                                    </form>
+                                        <input type="number" name="quantity" class="form-control form-control-sm text-center border-0 quantity-input" value="{{ $details['quantity'] }}" data-price="{{ $details['amount'] }}" min="1">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
+                                                <i class="fa fa-plus"></i>
+                                            </button>
+                                        </div>
+                                    </div>
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4 item-total">{{ number_format($details['amount'] * $details['quantity'], 2) }}</p>
@@ -122,15 +118,11 @@
                                     <h5>Delivery Options:</h5>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="deliveryOption" id="withinOwerri" value="2000" checked>
-                                        <label class="form-check-label" for="withinOwerri">
-                                            Within Owerri (2,000)
-                                        </label>
+                                        <label class="form-check-label" for="withinOwerri">Within Owerri (2,000)</label>
                                     </div>
                                     <div class="form-check">
                                         <input class="form-check-input" type="radio" name="deliveryOption" id="outsideOwerri" value="4000">
-                                        <label class="form-check-label" for="outsideOwerri">
-                                            Outside Owerri (4,000)
-                                        </label>
+                                        <label class="form-check-label" for="outsideOwerri">Outside Owerri (4,000)</label>
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +187,6 @@
         </div>
 
 
-
         <script>
             document.addEventListener('DOMContentLoaded', function () {
                 const quantityInputs = document.querySelectorAll('.quantity-input');
@@ -223,8 +214,25 @@
                     totalElement.textContent = total.toFixed(2);
                 }
         
+                function updateQuantity(button, increment) {
+                    const input = button.closest('.input-group').querySelector('.quantity-input');
+                    let quantity = parseInt(input.value);
+                    quantity += increment;
+                    if (quantity < 1) quantity = 1;
+                    input.value = quantity;
+                    calculateSubtotal();
+                }
+        
                 quantityInputs.forEach(input => {
                     input.addEventListener('input', calculateSubtotal);
+                });
+        
+                document.querySelectorAll('.btn-plus').forEach(button => {
+                    button.addEventListener('click', () => updateQuantity(button, 1));
+                });
+        
+                document.querySelectorAll('.btn-minus').forEach(button => {
+                    button.addEventListener('click', () => updateQuantity(button, -1));
                 });
         
                 deliveryOptions.forEach(option => {
@@ -237,51 +245,6 @@
                 calculateSubtotal(); // Initial calculation
             });
         </script>
-            
-                  
-
-                  
-        <!-- Cart Page End -->
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function () {
-                function updateItemTotal(row) {
-                    var price = parseFloat(row.querySelector('.quantity-input').dataset.price);
-                    var quantity = parseInt(row.querySelector('.quantity-input').value, 10);
-                    var total = price * quantity;
-                    row.querySelector('.item-total').textContent = total.toFixed(2);
-                }
-            
-                document.querySelectorAll('.btn-minus').forEach(function (button) {
-                    button.addEventListener('click', function () {
-                        var input = this.closest('.input-group').querySelector('input[type="number"]');
-                        var value = parseInt(input.value, 10);
-                        if (value > 1) {
-                            input.value = value - 1;
-                            updateItemTotal(this.closest('tr'));
-                        }
-                    });
-                });
-            
-                document.querySelectorAll('.btn-plus').forEach(function (button) {
-                    button.addEventListener('click', function () {
-                        var input = this.closest('.input-group').querySelector('input[type="number"]');
-                        input.value = parseInt(input.value, 10) + 1;
-                        updateItemTotal(this.closest('tr'));
-                    });
-                });
-            
-                document.querySelectorAll('.quantity-input').forEach(function (input) {
-                    input.addEventListener('change', function () {
-                        if (this.value < 1) {
-                            this.value = 1;
-                        }
-                        updateItemTotal(this.closest('tr'));
-                    });
-                });
-            });
-        </script>
-            
-
+        
 
   @include('footer')
