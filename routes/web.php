@@ -6,9 +6,10 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $watchs = Watch::all();
-    return view('welcome',compact('watchs'));
+    $watchs = Watch::take(3)->get();
+    return view('welcome', compact('watchs'));
 });
+
 
 Route::get('/dashboard', function () {
 

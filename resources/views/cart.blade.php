@@ -67,24 +67,26 @@
                                     <p class="mb-0 mt-4">{{ number_format($details['amount'], 2) }}</p>
                                 </td>
                                 <td>
+                                    
                                     <div class="input-group quantity mt-4" style="width: 150px;">
-                                        <div class="input-group-btn">
+                                        {{-- <div class="input-group-btn">
                                             <button type="button" class="btn btn-sm btn-minus rounded-circle bg-light border">
                                                 <i class="fa fa-minus"></i>
                                             </button>
-                                        </div>
-                                        <input type="number" name="quantity" class="form-control form-control-sm text-center border-0 quantity-input" value="{{ $details['quantity'] }}" data-price="{{ $details['amount'] }}" min="1">
-                                        <div class="input-group-btn">
+                                        </div> --}}
+                                        <input  name="quantity" class="form-control form-control-sm text-center border-0 quantity-input" value="{{ $details['quantity'] }}" data-price="{{ $details['amount'] }}" min="1">
+                                        {{-- <div class="input-group-btn">
                                             <button type="button" class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                 <i class="fa fa-plus"></i>
                                             </button>
-                                        </div>
+                                        </div> --}}
                                     </div>
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4 item-total">{{ number_format($details['amount'] * $details['quantity'], 2) }}</p>
                                 </td>
                                 <td>
+                                    <a  class="btn btn-primary" href=""> Update</a>
                                     <form action="{{ route('cart.remove', $id) }}" method="POST" class="d-inline">
                                         @csrf
                                         <button type="submit" class="btn btn-md rounded-circle bg-light border mt-4">

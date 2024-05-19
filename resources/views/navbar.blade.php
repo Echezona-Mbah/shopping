@@ -21,13 +21,20 @@
             <a href="" class="nav-item nav-link active">Home</a>
             <a href="{{ route('about') }}" class="nav-item nav-link">About</a>
             <a href="{{ route('contact') }}" class="nav-item nav-link">Contact us</a>
+            <a href="{{ route('cart.view') }}" class=" nav-item nav-link btn btn-primary py-4 px-lg-5 d-lg-block">
+                Cart <i class="bi bi-cart"></i>
+                @if(isset($cartCount) && $cartCount > 0)
+                    <span class="badge bg-danger">{{ $cartCount }}</span>
+                @endif
+            </a>
+            
         </div>
-        <a href="{{ route('cart.view') }}" class="btn btn-primary py-4 px-lg-5 d-none d-lg-block">
+        {{-- <a href="{{ route('cart.view') }}" class=" nav-item nav-link btn btn-primary py-4 px-lg-5 d-none d-lg-block">
             Cart <i class="bi bi-cart"></i>
             @if(isset($cartCount) && $cartCount > 0)
                 <span class="badge bg-danger">{{ $cartCount }}</span>
             @endif
-        </a>
+        </a> --}}
     </div>
 </nav>
 

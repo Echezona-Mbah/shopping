@@ -28,10 +28,11 @@ class CartController extends Controller
             ];
         }
         session()->put('cart', $cart);
+        $fff = $cart[$id]['quantity'];
 
-      // dd($cart);die();
+       //dd($cart[$id]['quantity']);die();
         // Display success alert
-        Alert::success('Success', 'Item added to cart successfully.');
+        Alert::success('Success', "$fff Item added to cart successfully.");
     
         return redirect()->back();
     }
