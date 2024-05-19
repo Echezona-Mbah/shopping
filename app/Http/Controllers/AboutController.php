@@ -26,8 +26,8 @@ class AboutController extends Controller
     }
 
     public function allitems(){
-
-        return view('allitems');
+        $watchs = Watch::all();
+        return view('allitems',compact('watchs'));
     }
 
     public function details($id){
