@@ -87,7 +87,7 @@ class CartController extends Controller
         }
 
         foreach ($cart as $id => $details) {
-           dd($details);die();
+          // dd($details);die();
 
             $orderItem = new CartItem();
             $orderItem->name = $details['name'];
@@ -105,6 +105,14 @@ class CartController extends Controller
         Alert::success('Success', 'Order placed successfully.');
     
         return redirect()->back();
+    }
+
+    public function someMethod(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $cartCount = array_sum(array_column($cart, 'quantity'));
+
+        return view('some.view', ['cartCount' => $cartCount]);
     }
 
 }
