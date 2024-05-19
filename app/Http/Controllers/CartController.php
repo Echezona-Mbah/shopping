@@ -77,34 +77,34 @@ class CartController extends Controller
             'total' => 'required|numeric',
             'deliveryOption' => 'required|numeric',
         ]);
-        // dd($request->all());die();
+       //  dd($request->all());die();
 
         $cart = session()->get('cart', []);
 
         if (!$cart) {
-            return redirect()->back()->with('error', 'Your cart is empty.');
+            Alert::success('error', 'Your cart is empty.');
+            return redirect()->back();
         }
 
-        $order = new Watch();
-        $order->subtotal = $request->subtotal;
-        $order->delivery_charge = $request->deliveryOption;
-        $order->total = $request->total;
-        $order->save();
-
         foreach ($cart as $id => $details) {
-            dd($details);die();
+           dd($details);die();
 
             $orderItem = new CartItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $id;
+            $orderItem->name = $details['name'];
             $orderItem->quantity = $details['quantity'];
-            $orderItem->price = $details['amount'];
+            $orderItem->amount = $details['amount'];
+            $orderItem->description = $details['description'];
+            $orderItem->img = $details['img'];
+            $orderItem->subtotal = $request->subtotal;
+            $orderItem->deliveryOption = $request->deliveryOption;
+            $orderItem->total = $request->total;
             $orderItem->save();
         }
 
         session()->forget('cart');
-
-        return redirect()->route('home')->with('success', 'Order placed successfully.');
+        Alert::success('Success', 'Order placed successfully.');
+    
+        return redirect()->back();
     }
 
 }

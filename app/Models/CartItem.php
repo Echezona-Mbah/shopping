@@ -14,6 +14,9 @@ class CartItem extends Model
         'amount',
         'description', 
         'quantity',
-        'img'
+        'img',
+        'subtotal',
+        'deliveryOption',
+        'total'
     ];
 }
