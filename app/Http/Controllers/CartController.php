@@ -37,8 +37,6 @@ class CartController extends Controller
         return redirect()->back();
     }
     
-    
-
     public function viewCart()
     {
         $cart = session()->get('cart');
