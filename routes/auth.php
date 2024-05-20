@@ -56,6 +56,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('watch', [WatchController::class, 'watch'])->name('watch');
     Route::post('watch', [WatchController::class, 'store'])->name('watch');
+    Route::get('watch-table', [WatchController::class, 'allWatch'])->name('watch-table');
+    Route::get('watch/{id}', [WatchController::class, 'editWatch'])->name('watch.edit');
+    Route::post('watch/{id}', [WatchController::class, 'update'])->name('watch.update');
+    Route::delete('watch/{id}', [WatchController::class, 'aboutdestroy'])->name('watch.destroy');
+
 
 
 

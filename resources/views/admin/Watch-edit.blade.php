@@ -20,24 +20,24 @@
             <div class="col-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Basic form elements</h4>
+                    <h4 class="card-title">Update Product</h4>
                     <p class="card-description">
-                      Basic form elements
+                        Update Product
                     </p>
-                    <form method="POST" action="{{ route('watch') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('watch.update', $editWatch->id) }}" enctype="multipart/form-data">
                         @csrf
 
                       <div class="form-group">
                         <label for="exampleInputName1">Name</label>
-                        <input type="text" name="name" class="form-control" id="exampleInputName1" placeholder="Name">
+                        <input type="text" name="name" class="form-control" id="exampleInputName1" value="{{$editWatch->name}}" placeholder="Name">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputName1">Amount</label>
-                        <input type="text"  name="amount" class="form-control" id="exampleInputName1" placeholder="Amount">
+                        <input type="text"  name="amount" class="form-control" id="exampleInputName1" value="{{$editWatch->amount}}" placeholder="Amount">
                       </div>
                       <div class="form-group">
                         <label for="exampleInputName1">Sold</label>
-                        <input type="text" name="sold" class="form-control" id="exampleInputName1" placeholder="sold">
+                        <input type="text" name="sold" class="form-control" id="exampleInputName1" value="{{$editWatch->sold}}" placeholder="sold">
                       </div>
 
                       <div class="form-group">
@@ -53,10 +53,11 @@
                     
 
 
-                      <div class="form-group">
-                        <label for="exampleTextarea1">Discription</label>
-                        <textarea class="form-control" name="discription" id="exampleTextarea1" rows="4"></textarea>
-                      </div>
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Description</label>
+                        <textarea class="form-control" name="discription" id="exampleTextarea1" rows="4">{{ $editWatch->discription }}</textarea>
+                    </div>
+                    
                       <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                   </div>
