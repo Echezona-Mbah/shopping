@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Models\CartItem;
+use App\Models\User;
 use App\Models\Watch;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -12,8 +14,15 @@ Route::get('/', function () {
 
 
 Route::get('/dashboard', function () {
+    $CartItemCount = CartItem::count();
+    $watch = Watch::count();
+    $user = User::count();
+    $cartitems = CartItem::all();
 
-    return view('admin.dashboard');
+
+    // dd($CartItemCount);die();
+
+    return view('admin.dashboard', compact('CartItemCount','watch','user','cartitems'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

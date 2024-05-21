@@ -23,8 +23,8 @@
                 <div class="card-body">
                   <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                     <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Expenses</p>
-                      <h1 class="mb-0">8742</h1>
+                      <p class="mb-2 text-md-center text-lg-left">Total Cart</p>
+                      <h1 class="mb-0">{{$CartItemCount}}</h1>
                     </div>
                     <i class="typcn typcn-briefcase icon-xl text-secondary"></i>
                   </div>
@@ -37,8 +37,8 @@
                 <div class="card-body">
                   <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                     <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Budget</p>
-                      <h1 class="mb-0">47,840</h1>
+                      <p class="mb-2 text-md-center text-lg-left">Total Product</p>
+                      <h1 class="mb-0">{{$watch}}</h1>
                     </div>
                     <i class="typcn typcn-chart-pie icon-xl text-secondary"></i>
                   </div>
@@ -51,8 +51,8 @@
                 <div class="card-body">
                   <div class="d-flex align-items-center justify-content-between justify-content-md-center justify-content-xl-between flex-wrap mb-4">
                     <div>
-                      <p class="mb-2 text-md-center text-lg-left">Total Balance</p>
-                      <h1 class="mb-0">$7,243</h1>
+                      <p class="mb-2 text-md-center text-lg-left">Total Admin</p>
+                      <h1 class="mb-0">{{$user}}</h1>
                     </div>
                     <i class="typcn typcn-clipboard icon-xl text-secondary"></i>
                   </div>
@@ -69,116 +69,43 @@
                   <table class="table table-striped project-orders-table">
                     <thead>
                       <tr>
-                        <th class="ml-5">ID</th>
-                        <th>Project name</th>
-                        <th>Customer</th>
-                        <th>Deadline</th>
-                        <th>Payouts	</th>
-                        <th>Traffic</th>
-                        <th>Actions</th>
+                        <th>Images</th>
+                        <th>Name</th>
+                        <th>Amount</th>
+                        <th>Quantity</th>
+                        <th>Sub total</th>
+                        <th>Total</th>
+                        <th>Delivery Option</th>
+                        <th>Delete</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>#D1</td>
-                        <td>Consectetur adipisicing elit </td>
-                        <td>Beulah Cummings</td>
-                        <td>03 Jan 2019</td>
-                        <td>$ 5235</td>
-                        <td>1.3K</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                              Edit
-                              <i class="typcn typcn-edit btn-icon-append"></i>                          
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                              Delete
-                              <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#D2</td>
-                        <td>Correlation natural resources silo</td>
-                        <td>Mitchel Dunford</td>
-                        <td>09 Oct 2019</td>
-                        <td>$ 3233</td>
-                        <td>5.4K</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                              Edit
-                              <i class="typcn typcn-edit btn-icon-append"></i>                          
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                              Delete
-                              <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#D3</td>
-                        <td>social capital compassion social</td>
-                        <td>Pei Canaday</td>
-                        <td>18 Jun 2019</td>
-                        <td>$ 4311</td>
-                        <td>2.1K</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                              Edit
-                              <i class="typcn typcn-edit btn-icon-append"></i>                          
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                              Delete
-                              <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#D4</td>
-                        <td>empower communities thought</td>
-                        <td>Gaynell Sharpton</td>
-                        <td>23 Mar 2019</td>
-                        <td>$ 7743</td>
-                        <td>2.7K</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                              Edit
-                              <i class="typcn typcn-edit btn-icon-append"></i>                          
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                              Delete
-                              <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>#D5</td>
-                        <td> Targeted effective; mobilize </td>
-                        <td>Audrie Midyett</td>
-                        <td>22 Aug 2019</td>
-                        <td>$ 2455</td>
-                        <td>1.2K</td>
-                        <td>
-                          <div class="d-flex align-items-center">
-                            <button type="button" class="btn btn-success btn-sm btn-icon-text mr-3">
-                              Edit
-                              <i class="typcn typcn-edit btn-icon-append"></i>                          
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm btn-icon-text">
-                              Delete
-                              <i class="typcn typcn-delete-outline btn-icon-append"></i>                          
-                            </button>
-                          </div>
-                        </td>
-                      </tr>
+                      @foreach ($cartitems as $cartitem)
+
+                    <tr>
+                      <td class="py-1">
+                        <img src="{{('uploads/' .$cartitem->img)}}" alt="image"/>
+                      </td>
+                      <td>{{$cartitem->name}}</td>
+                      <td>₦{{$cartitem->amount}}</td>
+                      <td>{{$cartitem->quantity}}</td>
+                      <td>₦{{$cartitem->subtotal}}</td>
+                      <td>₦{{$cartitem->total}}</td>
+                      <td>₦{{$cartitem->deliveryOption}}</td>
+                      
+                      <td>
+                          <form action="{{ route('cart.destroy', $cartitem->id) }}" method="POST">
+                              @csrf
+                              @method('DELETE')
+                              <button type="submit" class="btn btn-danger">Delete</button>
+                          </form>
+                          {{-- <button type="button" class="btn btn-success">success</button> --}}
+                      </td>
+                    </tr>
+                    @endforeach
+
+                  </tbody>                      
+
                     </tbody>
                   </table>
                 </div>
