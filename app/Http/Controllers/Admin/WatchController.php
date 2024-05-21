@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CartItem;
 use App\Models\Watch;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -93,6 +94,36 @@ class WatchController extends Controller
         }
 
         Alert::success("success", 'Product updated successfully.')->showConfirmButton('OK');
+
+        return redirect()->back();
+    }
+
+    public function watchdestroy($id)
+    {
+        $team = Watch::find($id);
+        if (!$team) {
+            return redirect()->back()->with('error', 'Product not found.');
+        }
+        $team->delete();
+        Alert::success("success", 'Product deleted successfully')->showConfirmButton('OK');
+
+        return redirect()->back();
+    }
+
+
+    public function allCart(){
+        $cartitems = CartItem::all();
+        return view('admin.cart-table',compact('cartitems'));
+    }
+
+    public function cartdestroy($id)
+    {
+        $team = CartItem::find($id);
+        if (!$team) {
+            return redirect()->back()->with('error', 'Cart not found.');
+        }
+        $team->delete();
+        Alert::success("success", 'Cart deleted successfully')->showConfirmButton('OK');
 
         return redirect()->back();
     }

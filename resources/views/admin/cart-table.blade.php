@@ -21,36 +21,38 @@
             <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">ALL PRODUCT</h4>
+                    <h4 class="card-title">ALL Cart</h4>
                     <div class="table-responsive">
                       <table class="table table-striped">
                         <thead>
                           <tr>
-                            <th>Product Images</th>
-                            <th>Product Name</th>
-                            <th>Product Amount</th>
-                            <th>Product Sold</th>
-                            <th>Product Descripion</th>
+                            <th>Images</th>
+                            <th>Name</th>
+                            <th>Amount</th>
+                            <th>Quantity</th>
+                            <th>Sub total</th>
+                            <th>Total</th>
+                            <th>Delivery Option</th>
+                            <th>Delete</th>
+
                           </tr>
                         </thead>
                         <tbody>
-                            @foreach ($allWatchs as $allWatch)
+                            @foreach ($cartitems as $cartitem)
 
                           <tr>
                             <td class="py-1">
-                              <img src="{{('uploads/' .$allWatch->imgs)}}" alt="image"/>
+                              <img src="{{('uploads/' .$cartitem->img)}}" alt="image"/>
                             </td>
-                            <td>{{$allWatch->name}}</td>
-                            <td>₦{{$allWatch->amount}}</td>
-                            <td>{{$allWatch->sold}}</td>
-                            <td>{{$allWatch->discription}}</td>
-                            <td>
-                                <a href="{{ route('watch.edit', $allWatch->id) }}" class="btn btn-primary">Edit</a>
-
-                            </td>
+                            <td>{{$cartitem->name}}</td>
+                            <td>₦{{$cartitem->amount}}</td>
+                            <td>{{$cartitem->quantity}}</td>
+                            <td>₦{{$cartitem->subtotal}}</td>
+                            <td>₦{{$cartitem->total}}</td>
+                            <td>₦{{$cartitem->deliveryOption}}</td>
                             
                             <td>
-                                <form action="{{ route('watch.destroy', $allWatch->id) }}" method="POST">
+                                <form action="{{ route('cart.destroy', $cartitem->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
